@@ -1,0 +1,1 @@
+cd ~/emulator/ac/cf/; rm -rf *; unzip ~/images.zip -d .; mv images/* .; tar xvf cvd-host_package.tar.gz; cd ~/Hyper-Permission-Mapper/; ./scripts/stop_cvd.sh; sleep 3; ./scripts/start_cvd.sh; ./scripts/stop_cvd.sh; sleep 3; ./scripts/start_cvd.sh

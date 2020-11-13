@@ -1,0 +1,13 @@
+{
+    "method": null,
+    "service": null,
+    "instrumentation_info": {},
+    "instrumented_classes": [],
+    "uid": null,
+    "pid": null,
+    "profile": null,
+    "fake_uid": null,
+    "fake_pid": null,
+    "fake_profile": null,
+    "permissions": []
+}

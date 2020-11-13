@@ -1,0 +1,20 @@
+{
+    "callstack": [],
+    "data": {
+        "appOps": [],
+        "methods": [],
+        "permissions": [],
+        "pid": null,
+        "uid": null,
+        "userId": null,
+        "user_restrictions": [],
+        "parameters_hash": null,
+        "ignored_permissions": []
+    },
+    "exception": null,
+    "invocation_result": {},
+    "output": null,
+    "returns": false,
+    "to_instrument": [],
+    "hash": null
+}
