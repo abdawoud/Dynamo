@@ -18,11 +18,14 @@ from includes.constants import WHITE_SPACE_BREAKAGE, CARRIAGE_RETURN_NEW_LINE_BR
     SERVICE_PROCESS_MAP_LISTS, ORDERED_ACTION_TEMPLATE_FILE_NAME, UIDS_TO_FUZZ, API_DEFERRED_ACTIONS_FILE_NAME
 
 from models.task import Task, get_api_name, get_parameters, get_service_name
-from code.generator.parameters_generator import ParametersGenerator
+from src.generator.parameters_generator import ParametersGenerator
 
 
 def shell_execute(command: list, timeout: int = 0) -> (str, str):
-    out = subprocess.Popen(command,
+    environment = os.environ.copy()
+    environment['PATH'] = f"{environment['PATH']}:{environment['HOME']}/.local/bin/"
+
+    out = subprocess.Popen(command, env=environment,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.STDOUT)
 

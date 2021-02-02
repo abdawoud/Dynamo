@@ -1,4 +1,4 @@
-from code.adb.adb_server import AdbServer
+from src.adb.adb_server import AdbServer
 from includes.constants import LOCALHOST, LOCALHOST_IP, WHITE_SPACE_BREAKAGE
 from utils import helpers
 import os

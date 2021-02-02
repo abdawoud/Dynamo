@@ -1,0 +1,5 @@
+{
+    "cf_dir": "<path_to>/cf",
+    "fuzzer_apk_path": "path_to_fuzzer.apk",
+    "static_analysis_output_path": "path_to_fuzzer_input.json"
+}

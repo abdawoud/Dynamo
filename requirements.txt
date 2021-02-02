@@ -1,2 +1,7 @@
+coloredlogs==14.0
+frida==14.2.8
+frida-tools==9.1.0
 wget==3.2
-frida-tools
+pyzmq==20.0.0
+pytest==6.2.1
+requests~=2.25.1

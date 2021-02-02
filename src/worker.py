@@ -1,22 +1,22 @@
 import traceback
+
+from src.base_worker import BaseWorker
 from models.device import Device
 from utils import helpers
-from includes.constants import FRIDA_SERVER_PATH_ON_DEVICE, FRIDA_SERVER_EXECUTION_MODE, APIS, FUZZER_APP_PKG_NAME, \
-    MERAKI_PKG_NAME
+from includes.constants import APIS, FUZZER_APP_PKG_NAME, MERAKI_PKG_NAME
 import copy
 import threading
 import time
 from utils.cuttlefish import Cuttelfish
-from utils.log import Logger
 from models.task import Task, get_api_name, get_service_name
 from typing import Any
 from threading import Lock
 from .instrumentation.instrumentor import Instrumentor
-from code.analyze.analyzer import Analyzer
-from code.analyze.reporter import Reporter
+from src.analyze.analyzer import Analyzer
+from src.analyze.reporter import Reporter
 
 
-class Worker:
+class Worker(BaseWorker):
     class WorkerThread(threading.Thread):
         def __init__(self, worker: Any, lock: Lock):
             threading.Thread.__init__(self)
@@ -25,7 +25,7 @@ class Worker:
             self.cuttlefish = Cuttelfish()
 
         def run(self):
-            self.worker.prepare_worker()
+            self.worker.prepare()
             self.worker.create_api_tasks_files()
             self.worker.clean_stats()
 
@@ -33,16 +33,10 @@ class Worker:
             while True:
                 Worker.process_data(self.worker, self.lock)
 
-    def prepare_worker(self):
+    def prepare(self):
         while True:
             try:
-                success = self.install_and_run_frida()
-                if not success:
-                    error = "Cannot run frida!"
-                    self.logger.elog(error)
-                    raise Exception(error)
-                else:
-                    self.logger.ilog("Frida is installed and running")
+                super().prepare()  # installs & starts frida
 
                 success = self.install_app(FUZZER_APP_PKG_NAME)
                 if not success:
@@ -92,7 +86,7 @@ class Worker:
                 break
             except Exception as e:
                 traceback.print_exc()
-                self.logger.exception(__file__, self.prepare_worker, e)
+                self.logger.exception(__file__, self.prepare, e)
                 time.sleep(5)
 
     def restart_cuttlefish(self):
@@ -179,59 +173,6 @@ class Worker:
     def stop(self):
         print(self.device.get_device_id(), "Exiting the thread based on Ctl+c")
         self.exit_thread = True
-
-    def install_app(self, pkg_name: str):
-        path = helpers.get_app_info(pkg_name)
-
-        pkg_installed = self.device.check_app_exists(pkg_name)
-        reinstall = False
-
-        if pkg_installed:
-            if pkg_name == FUZZER_APP_PKG_NAME:
-                stats = helpers.get_stats(self.device_common_id)
-                if stats and 'apk_hash' in stats:
-                    apk_hash = helpers.sha256sum(path)
-                    if stats['apk_hash'] == apk_hash:
-                        print(self.device.get_device_id(), "APks checksums matche...")
-                        return True
-
-                reinstall = True
-            else:
-                return True
-
-        if reinstall:
-            print(self.device.get_device_id(), "Uninstalling the app...")
-            self.device.adb_connection.uninstall(pkg_name)
-
-        stats = helpers.get_stats(self.device_common_id)
-        if stats:
-            apk_hash = helpers.sha256sum(path)
-            stats['apk_hash'] = apk_hash
-            helpers.persist_stats(self.device_common_id, stats)
-
-        print(self.device.get_device_id(), "Installing the app...")
-        self.device.adb_connection.install(path)
-
-        return self.device.check_app_exists(pkg_name)
-
-    def install_and_run_frida(self) -> bool:
-        if self.device.is_frida_running():
-            self.logger.ilog("Frida is running!")
-            return True
-
-        abi = self.device.get_abi()
-        path = helpers.get_frida_server(abi)
-        self.device.adb_connection.push(path, FRIDA_SERVER_PATH_ON_DEVICE)
-        self.device.file_chmod(FRIDA_SERVER_PATH_ON_DEVICE, FRIDA_SERVER_EXECUTION_MODE)
-        self.device.start_frida_in_background(FRIDA_SERVER_PATH_ON_DEVICE)
-
-        time.sleep(2)
-
-        if self.device.is_frida_running():
-            self.logger.ilog("Frida is running!")
-            return True
-
-        return False
 
     def start_fuzzing_app_main_activity(self, user_id: int = 0):
         return self.device.start_fuzzing_app_main_activity(user_id)
@@ -458,13 +399,10 @@ class Worker:
         self.validate_error_counters(task, setup)
 
     def __init__(self, device: Device, lock: Any, selected_service: str = None, selected_api: str = None):
-        self.device = device
+        super().__init__(device)
         self.selected_service = selected_service
         self.selected_api = selected_api
         self.instrumentor = Instrumentor(self.device)
-        self.device_common_id = self.device.get_common_id()
-        self.logger = Logger(self.device)
-        self.exit_thread = False
         self.worker_thread = Worker.WorkerThread(self, lock)
 
     def __del__(self):

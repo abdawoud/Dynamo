@@ -1,0 +1,48 @@
+{
+  "detected_permissions": [
+    {
+      "input": {
+        "type": "update_api_1",
+        "uri": "content://de.cispa.testcontentprovider.write_protected_provider/something/5",
+        "contentValue": {
+          "type": "STRING",
+          "key": "SomeKey"
+        },
+        "selection": "someSelection"
+      },
+      "permissions": [
+        "de.cispa.testcontentprovider.permission.WRITE_SAMPLES"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "insert_api_1",
+        "uri": "content://de.cispa.testcontentprovider.write_protected_provider/something/5",
+        "contentValue": {
+          "type": "STRING",
+          "key": "SomeKey"
+        }
+      },
+      "permissions": [
+        "de.cispa.testcontentprovider.permission.WRITE_SAMPLES"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "delete_api_1",
+        "uri": "content://de.cispa.testcontentprovider.write_protected_provider/something/5",
+        "selection": "someSelection"
+      },
+      "permissions": [
+        "de.cispa.testcontentprovider.permission.WRITE_SAMPLES"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    }
+  ],
+  "unknown_permissions": []
+}
