@@ -4,7 +4,7 @@ from models.device import Device
 
 from utils import helpers
 from utils.log import Logger
-from code.analyze.analyzer import Analyzer
+from src.analyze.analyzer import Analyzer
 
 from includes.constants import FUZZER_APP_PKG_NAME, INVOKER_SERVICE, FIRST_USER_ID_SWITCH_PROFILE, FIRST_USER_ID, \
     SYSTEM_SERVER, SERVICE_MANAGER, INSTRUMENT_SERVICE_PROCESS_MAPPER_FILE, INSTRUMENT_PERMISSION_MAPPER_FILE, \

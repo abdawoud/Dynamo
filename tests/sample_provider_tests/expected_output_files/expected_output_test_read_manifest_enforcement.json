@@ -1,0 +1,20 @@
+{
+  "detected_permissions": [
+    {
+      "input": {
+        "type": "query_api_1",
+        "uri": "content://de.cispa.testcontentprovider.read_protected_provider/something/5",
+        "projection": null,
+        "selection": null,
+        "selectionArgs": null,
+        "sortOrder": null
+      },
+      "permissions": [
+        "de.cispa.testcontentprovider.permission.READ_SAMPLES"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    }
+  ],
+  "unknown_permissions": []
+}

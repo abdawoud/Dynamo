@@ -1,0 +1,78 @@
+{
+  "detected_permissions": [
+    {
+      "input": {
+        "type": "call_api_11_29",
+        "uri": "content://de.cispa.testcontentprovider.private_provider/something/5",
+        "apiLevel": "API_11",
+        "method": "",
+        "arg": null,
+        "extras": null
+      },
+      "permissions": [
+        "not_exported"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "update_api_1",
+        "uri": "content://de.cispa.testcontentprovider.private_provider/something/5",
+        "contentValue": {
+          "type": "STRING",
+          "key": "SomeKey"
+        },
+        "selection": "someSelection"
+      },
+      "permissions": [
+        "not_exported"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "insert_api_1",
+        "uri": "content://de.cispa.testcontentprovider.private_provider/something/5",
+        "contentValue": {
+          "type": "STRING",
+          "key": "SomeKey"
+        }
+      },
+      "permissions": [
+        "not_exported"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "delete_api_1",
+        "uri": "content://de.cispa.testcontentprovider.private_provider/something/5",
+        "selection": "someSelection"
+      },
+      "permissions": [
+        "not_exported"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    },
+    {
+      "input": {
+        "type": "query_api_1",
+        "uri": "content://de.cispa.testcontentprovider.private_provider/something/5",
+        "projection": null,
+        "selection": null,
+        "selectionArgs": null,
+        "sortOrder": null
+      },
+      "permissions": [
+        "not_exported"
+      ],
+      "thrown_exception": null,
+      "stacktrace": null
+    }
+  ],
+  "unknown_permissions": []
+}

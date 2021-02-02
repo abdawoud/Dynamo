@@ -132,3 +132,4 @@ dmypy.json
 out/*
 .idea
 res/frida_server/*
+cp_fuzz_config.json
