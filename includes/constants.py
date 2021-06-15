@@ -43,7 +43,7 @@ FUZZER_APP_PRIVATE_FILES_PATH = '/data/user/0/{}/files'.format(FUZZER_APP_PKG_NA
 FUZZER_APP_API_LIST_FILE_NAME = 'api-list.json'
 FUZZER_APP_INVOCATION_RESULT_FILE_NAME = 'invocation-result.json'
 
-FRIDA_SERVER_VERSION = '12.8.20'
+FRIDA_SERVER_VERSION = '14.2.18'
 FRIDA_SERVER = 'res/frida_server'
 FRIDA_RELEASES_URL = 'https://github.com/frida/frida/releases/download/{}'.format(FRIDA_SERVER_VERSION)
 FRIDA_SERVER_RAW_NAME = 'frida-server-{}-android-{}.xz'

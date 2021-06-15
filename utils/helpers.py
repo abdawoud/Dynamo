@@ -204,7 +204,7 @@ def get_json_template_path(name: str) -> str:
 
 
 def get_instrumentation_code_path(name: str) -> str:
-    dir_name = '{}/code/instrumentation/payloads/{}'.format(get_project_root_path(), name)
+    dir_name = '{}/src/instrumentation/payloads/{}'.format(get_project_root_path(), name)
     return dir_name
 
 
