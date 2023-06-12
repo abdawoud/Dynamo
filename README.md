@@ -25,7 +25,7 @@ Please, see Results directory for permission mappings of Android 6 and 10.
 ### Known Issues / Workarounds
 #### Wget not enough values to unpack
 ```
-user@cp-fuzzing-vm:~/dynamo_documentation/Dynamo$ python3 main.py --cf-dir "/home/user/cf" --device "127.0.0.1:6520" --api "requestAuthorization" --service "incidentcompanion"
+#:~/dynamo_documentation/Dynamo$ python3 main.py --cf-dir "/home/user/cf" --device "127.0.0.1:6520" --api "requestAuthorization" --service "incidentcompanion"
 127.0.0.1:6520 incidentcompanion requestAuthorization None None /home/user/cf
 # of connected devices: 0
 = Stopping Cuttlefish emulator...
@@ -52,7 +52,7 @@ Run `rm res/frida-server*` to solve this problem.
 
 #### self.pull_task(selected_service_api=service_api) - NotImplemented
 ```
-ssh://user@cp-fuzzing-vm.europe-west3-c.deft-justice-271522:22/usr/bin/python3 -u /home/user/dynamo_doc/main.py --cf-dir /home/user/cf --device 127.0.0.1:6520 --api getWifiEnabled --service wifi
+#: python3 -u /home/user/dynamo_doc/main.py --cf-dir /home/user/cf --device 127.0.0.1:6520 --api getWifiEnabled --service wifi
 127.0.0.1:6520 wifi getWifiEnabled None None /home/user/cf
 # of connected devices: 1
 100% [....................................................] 13383236 / 13383236127.0.0.1:6520 Frida is running!
